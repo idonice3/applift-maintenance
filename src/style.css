@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #111827;
+  --text-muted: #6e6b7a;
+  --brand: #ff395d;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  line-height: 1.5;
+}
+
+.applift {
+  display: flex;
+  color: #322f40;
+  font-size: 22px;
+  font-weight: 600;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  gap: 60px;
+  padding: 20px;
+  letter-spacing: -0.04rem;
+}
+.headline {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.description {
+  color: var(--text-muted);
+  font-size: 16px;
+  letter-spacing: ;
+  font-weight: 400;
+  width: 100%;
+}
+
+.cta-button {
+  cursor: pointer;
+  width: 205px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background: var(--brand);
+  box-shadow: 0 6px 20px rgba(255, 57, 93, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 57, 93, 0.4);
+}
+
+@media (max-width: 480px) {
+  .container {
+    align-items: center;
+    text-align: center;
+  }
+  .headline {
+    font-size: 1.1rem;
+  }
+
+  .cta-button {
+    width: 100%;
+    max-width: 320px;
+  }
+}
