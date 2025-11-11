@@ -1,4 +1,4 @@
-name = "applift-ido-test"
+name = "applift-maintenance"
 main = "src/worker.js"
 compatibility_date = "2025-11-11"
 
