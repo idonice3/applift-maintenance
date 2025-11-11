@@ -4,8 +4,7 @@ compatibility_date = "2025-11-10"
 
 [vars]
 LIVE_SITE = "https://www.applift.co"
-DEV_ACCESS_KEY = "applift_secret_2025"
-MAINTENANCE_MODE = true
+DEV_ACCESS_KEY = "applift_on_maintenance"
 
 [site]
-bucket = "src"
+bucket = "./public"

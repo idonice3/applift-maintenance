@@ -1,4 +1,4 @@
-import maintenanceHtml from "./index.html";
+import html from "./index.html";
 
 function parseCookies(cookieHeader = "") {
   return Object.fromEntries(
@@ -14,11 +14,11 @@ export default {
     const cookies = parseCookies(request.headers.get("Cookie"));
     const hasAccess = cookies.dev_access === env.DEV_ACCESS_KEY;
 
-    if (!env.MAINTENANCE_MODE || hasAccess) {
+    if (hasAccess) {
       return fetch(request);
     }
 
-    return new Response(maintenanceHtml, {
+    return new Response(html, {
       headers: { "content-type": "text/html; charset=utf-8" },
       status: 503,
     });
