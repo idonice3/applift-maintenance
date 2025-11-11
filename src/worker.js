@@ -1,5 +1,3 @@
-import html from "./index.html";
-
 function parseCookies(cookieHeader = "") {
   return Object.fromEntries(
     cookieHeader.split(";").map((c) => {
@@ -10,17 +8,27 @@ function parseCookies(cookieHeader = "") {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
     const cookies = parseCookies(request.headers.get("Cookie"));
     const hasAccess = cookies.dev_access === env.DEV_ACCESS_KEY;
 
-    if (hasAccess) {
-      return fetch(request);
+    // אם מצב תחזוקה כבוי או שיש גישה — תפנה לאתר החי
+    if (!env.MAINTENANCE_MODE || hasAccess) {
+      return fetch(env.LIVE_SITE + url.pathname);
     }
 
-    return new Response(html, {
-      headers: { "content-type": "text/html; charset=utf-8" },
-      status: 503,
-    });
+    // נשתמש ב-Assets של Cloudflare כדי לשרת קבצים מה-public
+    const assetUrl = new URL(url.pathname, request.url);
+    try {
+      // נסה להחזיר קובץ סטטי מה-public
+      return await env.ASSETS.fetch(assetUrl, request);
+    } catch {
+      // אם לא נמצא קובץ — החזר את index.html
+      return await env.ASSETS.fetch(
+        new URL("/index.html", request.url),
+        request
+      );
+    }
   },
 };

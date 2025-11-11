@@ -1,10 +1,14 @@
-name = "applift-maintenance"
+name = "applift-ido-test"
 main = "src/worker.js"
-compatibility_date = "2025-11-10"
+compatibility_date = "2025-11-11"
 
 [vars]
 LIVE_SITE = "https://www.applift.co"
 DEV_ACCESS_KEY = "applift_on_maintenance"
+MAINTENANCE_MODE = true
 
 [site]
 bucket = "./public"
+
+[build]
+upload.format = "modules"
