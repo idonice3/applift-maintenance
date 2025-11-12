@@ -1,14 +1,18 @@
-name = "applift-ido-test"
-main = "src/worker.js"
-compatibility_date = "2025-11-11"
+name = "applift-maintenance"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
 
-[vars]
-LIVE_SITE = "https://www.applift.co"
-DEV_ACCESS_KEY = "applift_on_maintenance"
-MAINTENANCE_MODE = true
+# Rules for importing HTML and CSS as text
+[[rules]]
+type = "Text"
+globs = ["**/*.html"]
+fallthrough = true
 
-[site]
-bucket = "./public"
+[[rules]]
+type = "Text"
+globs = ["**/*.css"]
+fallthrough = true
 
-[build]
-upload.format = "modules"
+[[rules]]
+type = "Data"
+globs = ["**/*.svg"]
