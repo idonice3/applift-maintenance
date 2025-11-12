@@ -4,7 +4,7 @@
   --bg-color: #ffffff;
   --text-color: #111827;
   --text-muted: #6e6b7a;
-  --brand: #6e6b7a;
+  --brand: black;
 }
 * {
   box-sizing: border-box;
