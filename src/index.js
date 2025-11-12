@@ -2,7 +2,11 @@ import maintenanceHtml from "./index.html";
 import css from "./style.css";
 import logo from "./applift-logo.svg";
 
-function parseCookies(cookieHeader = "") {
+function parseCookies(cookieHeader) {
+  if (typeof cookieHeader !== "string" || !cookieHeader.trim()) {
+    return {};
+  }
+
   return Object.fromEntries(
     cookieHeader.split(";").map((c) => {
       const [k, ...v] = c.trim().split("=");
@@ -14,20 +18,7 @@ function parseCookies(cookieHeader = "") {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    const cookies = parseCookies(request.headers.get("Cookie"));
-    const hasAccess = cookies.dev_access === env.DEV_ACCESS_KEY;
 
-    // If user has access, pass through to origin
-    // if (hasAccess) {
-    //   return fetch(request);
-    // }
-
-    if (hasAccess) {
-      return new Response("Access granted! You have the dev cookie.", {
-        headers: { "content-type": "text/html" },
-      });
-    }
-    // Serve CSS file
     if (url.pathname === "/style.css") {
       return new Response(css, {
         headers: {
@@ -37,7 +28,6 @@ export default {
       });
     }
 
-    // Serve SVG logo
     if (url.pathname === "/applift-logo.svg") {
       return new Response(logo, {
         headers: {
@@ -47,7 +37,13 @@ export default {
       });
     }
 
-    // Serve maintenance HTML for all other routes
+    const cookies = parseCookies(request.headers.get("Cookie"));
+    const hasAccess = cookies.dev_access === env.DEV_ACCESS_KEY;
+
+    if (hasAccess) {
+      return this.fetch(request);
+    }
+
     return new Response(maintenanceHtml, {
       headers: {
         "content-type": "text/html; charset=utf-8",
