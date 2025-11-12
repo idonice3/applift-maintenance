@@ -41,7 +41,7 @@ export default {
     const hasAccess = cookies.dev_access === env.DEV_ACCESS_KEY;
 
     if (hasAccess) {
-      return this.fetch(request);
+      return fetch(request);
     }
 
     return new Response(maintenanceHtml, {
