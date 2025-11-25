@@ -4,7 +4,7 @@
   --bg-color: #ffffff;
   --text-color: #111827;
   --text-muted: #6e6b7a;
-  --brand: black;
+  --brand: #ff395d;
 }
 * {
   box-sizing: border-box;
@@ -50,20 +50,21 @@ body {
 .description {
   color: var(--text-muted);
   font-size: 16px;
-  letter-spacing: ;
+  letter-spacing: -0.64px;
   font-weight: 400;
   width: 100%;
 }
 
 .cta-button {
   cursor: pointer;
-  width: 205px;
+  width: fit-content;
   padding: 14px 28px;
   border: none;
   border-radius: 999px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 700;
   color: #fff;
+
   background: var(--brand);
   box-shadow: 0 6px 20px rgba(255, 57, 93, 0.3);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
